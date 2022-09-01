@@ -40,6 +40,7 @@ android {
 dependencies {
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.ktx)
+  implementation(libs.material)
   implementation(libs.coil.kt)
   implementation(libs.hilt.android)
   implementation(libs.retrofit.core)

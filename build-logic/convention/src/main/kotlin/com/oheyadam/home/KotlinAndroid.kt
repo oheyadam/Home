@@ -21,7 +21,6 @@ internal fun Project.configureKotlinAndroid(commonExtension: CommonExtension<*, 
     compileOptions {
       sourceCompatibility = VERSION_11
       targetCompatibility = VERSION_11
-      isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
