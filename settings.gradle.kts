@@ -19,3 +19,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Home"
 include(":app")
+include(":core-common")
