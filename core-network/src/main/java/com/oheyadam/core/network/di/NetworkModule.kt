@@ -3,9 +3,12 @@ package com.oheyadam.core.network.di
 import android.content.Context
 import com.oheyadam.core.network.service.HackerNewsService
 import com.squareup.moshi.Moshi
+import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -16,7 +19,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
 import javax.inject.Singleton
 
-@Singleton
+@Module
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
   @Provides
