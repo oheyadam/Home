@@ -42,6 +42,8 @@ dependencies {
   implementation(libs.androidx.core.ktx)
   implementation(libs.coil.kt)
   implementation(libs.hilt.android)
+  implementation(libs.retrofit.core)
+  implementation(libs.okhttp.logging)
 
   kapt(libs.hilt.compiler)
 
