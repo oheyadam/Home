@@ -5,9 +5,14 @@ plugins {
 
 android {
   namespace = "com.oheyadam.core.common"
+  buildFeatures {
+    viewBinding = true
+  }
 }
 dependencies {
   implementation(libs.kotlinx.coroutines.android)
+  implementation(libs.androidx.fragment.ktx)
   implementation(libs.hilt.android)
+  implementation(libs.androidx.recyclerview)
   kapt(libs.hilt.compiler)
 }
