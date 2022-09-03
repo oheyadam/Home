@@ -93,8 +93,4 @@ class BreedsFragment : Fragment() {
       }
       .show()
   }
-
-  companion object {
-    fun newInstance() = BreedsFragment()
-  }
 }

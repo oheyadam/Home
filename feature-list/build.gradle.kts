@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-  namespace = "com.oheyadam.feature.stories"
+  namespace = "com.oheyadam.feature.list"
   buildFeatures {
     viewBinding = true
   }
