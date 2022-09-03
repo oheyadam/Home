@@ -22,17 +22,25 @@ gradlePlugin {
       id = "home.android.application"
       implementationClass = "AndroidApplicationConventionPlugin"
     }
-    register("androidTest") {
-      id = "home.android.test"
-      implementationClass = "AndroidTestConventionPlugin"
+    register("androidApplicationCompose") {
+      id = "home.android.application.compose"
+      implementationClass = "AndroidApplicationComposeConventionPlugin"
     }
     register("androidLibrary") {
       id = "home.android.library"
       implementationClass = "AndroidLibraryConventionPlugin"
     }
+    register("androidLibraryCompose") {
+      id = "home.android.library.compose"
+      implementationClass = "AndroidLibraryComposeConventionPlugin"
+    }
     register("androidFeature") {
       id = "home.android.feature"
       implementationClass = "AndroidFeatureConventionPlugin"
+    }
+    register("androidTest") {
+      id = "home.android.test"
+      implementationClass = "AndroidTestConventionPlugin"
     }
   }
 }
