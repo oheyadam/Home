@@ -1,7 +1,8 @@
 package com.oheyadam.core.network.di
 
 import android.content.Context
-import com.oheyadam.core.network.service.HackerNewsService
+import com.oheyadam.core.network.call.ResultCallAdapterFactory
+import com.oheyadam.core.network.service.DogService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -61,14 +62,15 @@ object NetworkModule {
   fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit {
     return Retrofit.Builder()
       .addConverterFactory(MoshiConverterFactory.create(moshi))
+      .addCallAdapterFactory(ResultCallAdapterFactory)
       .client(client)
-      .baseUrl("https://hacker-news.firebaseio.com/v0/")
+      .baseUrl("https://api.thedogapi.com/v1/")
       .build()
   }
 
   @Provides
   @Singleton
-  fun provideHackerNewsService(retrofit: Retrofit): HackerNewsService {
+  fun provideDogService(retrofit: Retrofit): DogService {
     return retrofit.create()
   }
 }
