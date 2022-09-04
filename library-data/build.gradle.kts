@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "com.oheyadam.core.data"
+  namespace = "com.oheyadam.library.data"
 }
 
 dependencies {

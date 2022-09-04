@@ -40,7 +40,7 @@ android {
 
 dependencies {
   implementation(projects.coreCommon)
-  implementation(projects.coreData)
+  implementation(projects.libraryData)
   implementation(projects.coreModel)
   implementation(projects.coreNetwork)
   implementation(projects.libraryAnalytics)

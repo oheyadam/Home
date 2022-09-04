@@ -17,7 +17,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
       dependencies {
         add("implementation", project(":core-common"))
         add("implementation", project(":core-model"))
-        add("implementation", project(":core-data"))
+        add("implementation", project(":library-data"))
         add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
         add("implementation", libs.findLibrary("androidx.viewmodel.ktx").get())
         add("implementation", libs.findLibrary("coil.kt").get())
