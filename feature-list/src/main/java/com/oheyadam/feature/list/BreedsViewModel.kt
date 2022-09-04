@@ -8,19 +8,20 @@ import com.oheyadam.core.common.network.onException
 import com.oheyadam.core.common.network.onSuccess
 import com.oheyadam.core.data.usecase.SearchBreed
 import com.oheyadam.feature.list.model.toBreedItems
+import com.oheyadam.library.analytics.tracker.Trackers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
 class BreedsViewModel @Inject constructor(
-  private val searchBreed: SearchBreed
+  private val searchBreed: SearchBreed,
+  private val trackers: Trackers
 ) : ViewModel() {
 
   private val internalState = MutableStateFlow(BreedsState())
@@ -44,7 +45,6 @@ class BreedsViewModel @Inject constructor(
           internalState.update { s ->
             s.copy(isLoading = false, errorResId = R.string.error_generic)
           }
-          // report error to a tracking tool
         }
         .onException { throwable ->
           val errorResId = when (throwable) {
@@ -52,7 +52,7 @@ class BreedsViewModel @Inject constructor(
             else -> R.string.error_generic
           }
           internalState.update { s -> s.copy(isLoading = false, errorResId = errorResId) }
-          Timber.e(throwable)
+          trackers.error(throwable)
         }
     }
   }

@@ -13,9 +13,10 @@ android {
 }
 
 dependencies {
+  implementation(projects.libraryAnalytics)
+
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.recyclerview)
   implementation(libs.material)
-  implementation(libs.timber)
 }
