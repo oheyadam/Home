@@ -9,7 +9,11 @@
 
   <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/spacing_default"
+    android:layout_marginTop="@dimen/spacing_default"
+    android:layout_marginEnd="@dimen/spacing_default"
+    app:cardElevation="@dimen/spacing_medium"
     app:contentPadding="@dimen/spacing_default">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,39 +35,48 @@
         android:id="@+id/edittext_search_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="@string/hint_search"
+        android:imeOptions="actionSearch"
         android:importantForAutofill="no"
-        android:inputType="textAutoComplete"
+        android:inputType="textCapWords|textAutoCorrect"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_cancel"
+        app:layout_constraintEnd_toStartOf="@id/button_clear"
         app:layout_constraintStart_toEndOf="@id/image_search"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="LabelFor" />
+        app:layout_constraintTop_toTopOf="parent" />
 
       <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_cancel"
+        android:id="@+id/button_clear"
+        style="@style/Widget.Home.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:icon="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
   </com.google.android.material.card.MaterialCardView>
+
+  <com.google.android.material.progressindicator.LinearProgressIndicator
+    android:id="@+id/progress_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="@dimen/spacing_default"
+    android:layout_marginTop="@dimen/spacing_medium"
+    android:layout_marginEnd="@dimen/spacing_default"
+    android:indeterminate="true" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/list_dogs"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/spacing_default"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-  <androidx.core.widget.ContentLoadingProgressBar
-    android:id="@+id/progress_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:visibility="gone" />
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/breed_item" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

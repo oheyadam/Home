@@ -9,4 +9,8 @@ data class BreedsState(
   val query: String = "",
   val result: List<BreedItem> = listOf(),
   val selectedBreedId: Int? = null
-)
+) {
+
+  val isClearButtonVisible = query.isNotBlank()
+  val isEmptyStateVisible = !isLoading && query.isNotEmpty() && result.isEmpty()
+}

@@ -4,13 +4,13 @@ import com.oheyadam.core.model.Breed
 
 data class BreedItem(
   val id: Int,
-  val thumbnailUrl: String,
+  val thumbnailUrl: String?,
   val name: String
 )
 
 fun Breed.toBreedItem() = BreedItem(
   id = id,
-  thumbnailUrl = referenceImageId,
+  thumbnailUrl = thumbnailUrl,
   name = name
 )
 

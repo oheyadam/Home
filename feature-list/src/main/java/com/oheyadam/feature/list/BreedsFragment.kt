@@ -1,12 +1,11 @@
 package com.oheyadam.feature.list
 
+import android.content.Context
 import android.os.Bundle
-import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.isVisible
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,12 +14,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.oheyadam.core.common.ui.recyclerview.ListItemDecoration
 import com.oheyadam.core.common.ui.viewbinding.viewBinding
-import com.oheyadam.feature.stories.R
-import com.oheyadam.feature.stories.databinding.FragmentBreedsBinding
+import com.oheyadam.feature.list.databinding.FragmentBreedsBinding
+import com.oheyadam.feature.list.navigation.ListNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import com.oheyadam.core.common.R as CommonR
 
-class BreedsFragment : Fragment() {
+@AndroidEntryPoint
+class BreedsFragment : Fragment(R.layout.fragment_breeds) {
+
+  @Inject
+  lateinit var navigator: ListNavigator
 
   private val viewModel: BreedsViewModel by viewModels()
   private val binding: FragmentBreedsBinding by viewBinding()
@@ -28,13 +33,6 @@ class BreedsFragment : Fragment() {
     viewModel.selectedBreed(breed.id)
   }
   private lateinit var itemDecoration: ListItemDecoration
-  private lateinit var textWatcher: TextWatcher
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View = binding.root
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -51,46 +49,75 @@ class BreedsFragment : Fragment() {
   private fun render(state: BreedsState) {
     with(binding) {
       progressView.isVisible = state.isLoading
+      buttonClear.isVisible = state.isClearButtonVisible
+      edittextSearchField.setText(state.query)
+      if (state.isEmptyStateVisible) showSnackbar(R.string.warning_no_matching_results)
       adapter.submitList(state.result)
       state.selectedBreedId?.let { selectedBreedId ->
-        // navigate to detail view
+        navigator.goToBreedDetail(selectedBreedId)
         viewModel.breedSelected()
       }
       state.errorResId?.let { errorResId ->
-        showSnackbar(errorResId, state.query)
+        showSnackbar(errorResId, refreshable = true) {
+          viewModel.search(state.query)
+          viewModel.errorMessageShown()
+        }
       }
     }
   }
 
   override fun onDestroyView() {
     super.onDestroyView()
-    with(binding) {
-      edittextSearchField.removeTextChangedListener(textWatcher)
-      listDogs.removeItemDecoration(itemDecoration)
-    }
+    binding.listDogs.removeItemDecoration(itemDecoration)
   }
 
   private fun initializeUiElements() {
-    val itemMargins = resources.getDimensionPixelSize(CommonR.dimen.spacing_default)
+    initializeRecyclerView()
     with(binding) {
-      buttonCancel.setOnClickListener {
-        edittextSearchField.text.clear()
+      buttonClear.setOnClickListener {
+        viewModel.clear()
       }
-      listDogs.adapter = adapter
-      listDogs.addItemDecoration(itemDecoration)
-      itemDecoration = ListItemDecoration(itemMargins)
-      textWatcher = edittextSearchField.doOnTextChanged { text, _, _, _ ->
-        viewModel.search(text.toString())
+      edittextSearchField.setOnEditorActionListener { textView, actionId, _ ->
+        return@setOnEditorActionListener when (actionId) {
+          EditorInfo.IME_ACTION_SEARCH -> {
+            viewModel.search(textView.text.toString())
+            hideSoftKeyboard(edittextSearchField)
+            true
+          }
+          else -> false
+        }
       }
     }
   }
 
-  private fun showSnackbar(errorResId: Int, query: String) {
-    Snackbar.make(binding.root, errorResId, Snackbar.LENGTH_LONG)
-      .setAction(R.string.action_refresh) {
-        viewModel.search(query)
-        viewModel.errorMessageShown()
+  private fun initializeRecyclerView() {
+    val itemMargins = resources.getDimensionPixelSize(CommonR.dimen.spacing_default)
+    itemDecoration = ListItemDecoration(itemMargins)
+    with(binding) {
+      listDogs.adapter = adapter
+      listDogs.addItemDecoration(itemDecoration)
+    }
+  }
+
+  private fun hideSoftKeyboard(view: View) {
+    if (view.requestFocus()) {
+      view.clearFocus()
+      val imm = requireActivity()
+        .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+      imm.hideSoftInputFromWindow(view.windowToken, InputMethodManager.RESULT_SHOWN)
+    }
+  }
+
+  private fun showSnackbar(
+    messageResId: Int, refreshable: Boolean = false, refreshAction: () -> Unit = {}
+  ) {
+    val length = if (refreshable) Snackbar.LENGTH_INDEFINITE else Snackbar.LENGTH_LONG
+    Snackbar.make(binding.root, messageResId, length).apply {
+      if (refreshable) {
+        setAction(R.string.action_refresh) {
+          refreshAction()
+        }
       }
-      .show()
+    }.show()
   }
 }

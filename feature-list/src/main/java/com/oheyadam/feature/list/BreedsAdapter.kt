@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.oheyadam.feature.list.databinding.BreedItemBinding
 import com.oheyadam.feature.list.model.BreedItem
-import com.oheyadam.feature.stories.databinding.BreedItemBinding
 
 private object BreedItemDiffCallback : DiffUtil.ItemCallback<BreedItem>() {
   override fun areItemsTheSame(oldItem: BreedItem, newItem: BreedItem): Boolean {
@@ -40,7 +40,11 @@ class BreedAdapter(
         root.setOnClickListener {
           itemClickListener(item)
         }
-        imageDog.load(item.thumbnailUrl)
+        imageDog.load(item.thumbnailUrl) {
+          crossfade(true)
+          // Load placeholder if no thumbnail exists
+          // placeholder(R.drawable.placeholder)
+        }
         textDogName.text = item.name
       }
     }

@@ -3,4 +3,6 @@
   <string name="error_no_internet_connection">Your device is offline</string>
   <string name="error_generic">Something went wrong. Please try again</string>
   <string name="action_refresh">Refresh</string>
+  <string name="hint_search">Search</string>
+  <string name="warning_no_matching_results">We couldn\'t find any results matching your query</string>
 </resources>

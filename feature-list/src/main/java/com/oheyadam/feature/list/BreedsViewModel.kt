@@ -8,12 +8,13 @@ import com.oheyadam.core.common.network.onException
 import com.oheyadam.core.common.network.onSuccess
 import com.oheyadam.core.data.usecase.SearchBreed
 import com.oheyadam.feature.list.model.toBreedItems
-import com.oheyadam.feature.stories.R
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.net.UnknownHostException
 import javax.inject.Inject
 
@@ -25,9 +26,12 @@ class BreedsViewModel @Inject constructor(
   private val internalState = MutableStateFlow(BreedsState())
   val state = internalState.asStateFlow()
 
+  private var job: Job? = null
+
   fun search(breed: String) {
     if (breed.isEmpty()) return
-    viewModelScope.launch {
+    job?.cancel()
+    job = viewModelScope.launch {
       internalState.update { s -> s.copy(isLoading = true, errorResId = null, query = breed) }
       searchBreed(breed)
         .onSuccess { breeds ->
@@ -43,12 +47,12 @@ class BreedsViewModel @Inject constructor(
           // report error to a tracking tool
         }
         .onException { throwable ->
-          when (throwable) {
-            is HttpException, is UnknownHostException -> internalState.update { s ->
-              s.copy(isLoading = false, errorResId = R.string.error_no_internet_connection)
-            }
+          val errorResId = when (throwable) {
+            is HttpException, is UnknownHostException -> R.string.error_no_internet_connection
+            else -> R.string.error_generic
           }
-          // report error to a tracking tool
+          internalState.update { s -> s.copy(isLoading = false, errorResId = errorResId) }
+          Timber.e(throwable)
         }
     }
   }
@@ -63,5 +67,10 @@ class BreedsViewModel @Inject constructor(
 
   fun errorMessageShown() {
     internalState.update { s -> s.copy(errorResId = null) }
+  }
+
+  fun clear() {
+    job?.cancel()
+    internalState.update { s -> s.copy(isLoading = false, query = "", result = emptyList()) }
   }
 }
