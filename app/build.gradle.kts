@@ -2,6 +2,7 @@ plugins {
   id("home.android.application")
   kotlin("kapt")
   id("dagger.hilt.android.plugin")
+  alias(libs.plugins.navigation.safe.args)
 }
 
 android {
@@ -43,6 +44,7 @@ dependencies {
   implementation(projects.coreModel)
   implementation(projects.coreNetwork)
   implementation(projects.featureList)
+  implementation(projects.featureDetail)
 
   implementation(libs.androidx.appcompat)
   implementation(libs.androidx.core.ktx)
@@ -55,6 +57,7 @@ dependencies {
   implementation(libs.hilt.android)
   implementation(libs.retrofit.core)
   implementation(libs.okhttp.logging)
+  implementation(libs.timber)
 
   kapt(libs.hilt.compiler)
 

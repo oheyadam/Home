@@ -7,8 +7,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.oheyadam.home.navigation.NavigatorLifecycleObserver
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
+  @Inject
+  lateinit var navigatorLifecycleObserver: NavigatorLifecycleObserver
+
   private lateinit var appBarConfiguration: AppBarConfiguration
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +26,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     val navController = navHostFragment.navController
     appBarConfiguration = AppBarConfiguration(navController.graph)
     setupActionBarWithNavController(navController, appBarConfiguration)
+    lifecycle.addObserver(navigatorLifecycleObserver)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    lifecycle.removeObserver(navigatorLifecycleObserver)
   }
 
   override fun onSupportNavigateUp(): Boolean {
