@@ -43,6 +43,7 @@ dependencies {
   implementation(projects.coreData)
   implementation(projects.coreModel)
   implementation(projects.coreNetwork)
+  implementation(projects.libraryAnalytics)
   implementation(projects.featureList)
   implementation(projects.featureDetail)
 
