@@ -54,7 +54,8 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
       if (state.isEmptyStateVisible) showSnackbar(CommonR.string.warning_no_matching_results)
       adapter.submitList(state.result)
       state.selectedBreedId?.let { selectedBreedId ->
-        navigator.goToBreedDetail(selectedBreedId, state.selectedBreedName)
+        val name = requireNotNull(state.selectedBreedName)
+        navigator.goToBreedDetail(selectedBreedId, name)
         viewModel.breedSelected()
       }
       state.errorResId?.let { errorResId ->

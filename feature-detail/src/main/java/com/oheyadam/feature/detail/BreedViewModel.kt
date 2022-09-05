@@ -36,10 +36,11 @@ class BreedViewModel @Inject constructor(
     val name: String = requireNotNull(savedStateHandle["breedName"])
     val id: Int = requireNotNull(savedStateHandle["breedId"])
     viewModelScope.launch {
-      state = state.copy(isLoading = true, errorResId = null, id = id)
+      state = state.copy(isLoading = true, errorResId = null)
       getDog(id, name)
         .onSuccess { breed ->
           state = state.copy(
+            id = id,
             isLoading = false,
             errorResId = null,
             name = breed.name,

@@ -5,13 +5,13 @@ import com.oheyadam.feature.list.model.BreedItem
 
 data class BreedsState(
   val isLoading: Boolean = false,
-  val query: String = "",
   val result: List<BreedItem> = listOf(),
+  val query: String? = null,
   val selectedBreedId: Int? = null,
-  val selectedBreedName: String = "",
+  val selectedBreedName: String? = null,
   @StringRes val errorResId: Int? = null
 ) {
 
-  val isClearButtonVisible = query.isNotBlank()
-  val isEmptyStateVisible = !isLoading && query.isNotEmpty() && result.isEmpty()
+  val isClearButtonVisible: Boolean = query?.isNotBlank() == true
+  val isEmptyStateVisible: Boolean = !isLoading && !query.isNullOrBlank() && result.isEmpty()
 }

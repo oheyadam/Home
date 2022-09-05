@@ -30,8 +30,8 @@ class BreedsViewModel @Inject constructor(
 
   private var job: Job? = null
 
-  fun search(breed: String) {
-    if (breed.isEmpty()) return
+  fun search(breed: String?) {
+    if (breed.isNullOrBlank()) return
     job?.cancel()
     job = viewModelScope.launch {
       internalState.update { s -> s.copy(isLoading = true, errorResId = null, query = breed) }
