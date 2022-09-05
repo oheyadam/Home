@@ -14,5 +14,6 @@ dependencies {
   implementation(libs.androidx.fragment.ktx)
   implementation(libs.hilt.android)
   implementation(libs.androidx.recyclerview)
+  implementation(libs.material)
   kapt(libs.hilt.compiler)
 }

@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BreedFragment : Fragment() {
-
-  private val viewModel: BreedViewModel by viewModels()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -27,9 +26,15 @@ class BreedFragment : Fragment() {
     view.setViewCompositionStrategy(DisposeOnViewTreeLifecycleDestroyed)
     view.setContent {
       MaterialTheme {
-
+        DetailScreen()
       }
     }
     return view
   }
+}
+
+@Preview
+@Composable
+fun Preview() {
+  DetailScreen()
 }

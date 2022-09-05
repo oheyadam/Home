@@ -5,10 +5,11 @@ import com.oheyadam.feature.list.model.BreedItem
 
 data class BreedsState(
   val isLoading: Boolean = false,
-  @StringRes val errorResId: Int? = null,
   val query: String = "",
   val result: List<BreedItem> = listOf(),
-  val selectedBreedId: Int? = null
+  val selectedBreedId: Int? = null,
+  val selectedBreedName: String = "",
+  @StringRes val errorResId: Int? = null
 ) {
 
   val isClearButtonVisible = query.isNotBlank()

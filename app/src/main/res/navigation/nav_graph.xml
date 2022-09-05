@@ -8,7 +8,6 @@
   <fragment
     android:id="@+id/breedsFragment"
     android:name="com.oheyadam.feature.list.BreedsFragment"
-    android:label="@string/label_fragment_search"
     tools:layout="@layout/fragment_breeds">
     <action
       android:id="@+id/action_breedsFragment_to_breedFragment"
@@ -21,11 +20,13 @@
 
   <fragment
     android:id="@+id/breedFragment"
-    android:name="com.oheyadam.feature.detail.BreedFragment"
-    android:label="BreedFragment">
+    android:name="com.oheyadam.feature.detail.BreedFragment">
     <argument
       android:name="breedId"
       app:argType="integer" />
+    <argument
+      android:name="breedName"
+      app:argType="string" />
   </fragment>
 
 </navigation>

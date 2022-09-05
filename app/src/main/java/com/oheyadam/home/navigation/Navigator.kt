@@ -20,13 +20,14 @@ class Navigator @Inject constructor() : ListNavigator {
     navController = null
   }
 
-  override fun goToBreedDetail(breedId: Int) {
-    val direction = BreedsFragmentDirections.actionBreedsFragmentToBreedFragment(breedId)
-    safelyNavigate(direction)
+  override fun goToBreedDetail(breedId: Int, breedName: String) {
+    val direction = BreedsFragmentDirections
+      .actionBreedsFragmentToBreedFragment(breedId, breedName)
+    navigate(direction)
   }
 
-  private fun safelyNavigate(directions: NavDirections) {
-    val controller = navController ?: return
-    controller.navigate(directions)
+  private fun navigate(direction: NavDirections) {
+    val controller = requireNotNull(navController)
+    controller.navigate(direction)
   }
 }

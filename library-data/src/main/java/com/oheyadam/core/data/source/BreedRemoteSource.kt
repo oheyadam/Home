@@ -29,6 +29,14 @@ class BreedRemoteSource @Inject constructor(
     }
   }
 
+  suspend fun getBreed(breedId: Int, breedName: String): Result<Breed> {
+    return when (val response = search(breedName)) {
+      is Success -> Success(response.data.first { breed -> breed.id == breedId })
+      is Error -> Error(response.code)
+      is Exception -> Exception(response.throwable)
+    }
+  }
+
   private suspend fun getImageUrl(referenceId: String): String {
     return when (val response = dogService.getImage(referenceId)) {
       is Success -> response.data.url

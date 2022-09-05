@@ -54,11 +54,7 @@ dependencies {
   implementation(libs.androidx.navigation.fragment.ktx)
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.material)
-  implementation(libs.coil.kt)
   implementation(libs.hilt.android)
-  implementation(libs.retrofit.core)
-  implementation(libs.okhttp.logging)
-  implementation(libs.timber)
 
   kapt(libs.hilt.compiler)
 

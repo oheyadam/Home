@@ -11,6 +11,7 @@ android {
 }
 
 dependencies {
+  implementation(projects.libraryAnalytics)
+  implementation(libs.androidx.activity.ktx)
   implementation(libs.androidx.fragment.ktx)
-  implementation(libs.timber)
 }

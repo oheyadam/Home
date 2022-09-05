@@ -30,7 +30,7 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
   private val viewModel: BreedsViewModel by viewModels()
   private val binding: FragmentBreedsBinding by viewBinding()
   private val adapter = BreedAdapter { breed ->
-    viewModel.selectedBreed(breed.id)
+    viewModel.selectedBreed(breed.id, breed.name)
   }
   private lateinit var itemDecoration: ListItemDecoration
 
@@ -51,10 +51,10 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
       progressView.isVisible = state.isLoading
       buttonClear.isVisible = state.isClearButtonVisible
       edittextSearchField.setText(state.query)
-      if (state.isEmptyStateVisible) showSnackbar(R.string.warning_no_matching_results)
+      if (state.isEmptyStateVisible) showSnackbar(CommonR.string.warning_no_matching_results)
       adapter.submitList(state.result)
       state.selectedBreedId?.let { selectedBreedId ->
-        navigator.goToBreedDetail(selectedBreedId)
+        navigator.goToBreedDetail(selectedBreedId, state.selectedBreedName)
         viewModel.breedSelected()
       }
       state.errorResId?.let { errorResId ->
@@ -114,7 +114,7 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
     val length = if (refreshable) Snackbar.LENGTH_INDEFINITE else Snackbar.LENGTH_LONG
     Snackbar.make(binding.root, messageResId, length).apply {
       if (refreshable) {
-        setAction(R.string.action_refresh) {
+        setAction(CommonR.string.action_refresh) {
           refreshAction()
         }
       }
