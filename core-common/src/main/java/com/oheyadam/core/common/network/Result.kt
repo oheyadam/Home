@@ -1,9 +1,9 @@
 package com.oheyadam.core.common.network
 
 sealed class Result<out T> {
-  class Success<out T>(val data: T) : Result<T>()
-  class Error(val code: Int) : Result<Nothing>()
-  class Exception(val throwable: Throwable) : Result<Nothing>()
+  data class Success<out T>(val data: T) : Result<T>()
+  data class Error(val code: Int) : Result<Nothing>()
+  data class Exception(val throwable: Throwable) : Result<Nothing>()
 }
 
 /**
