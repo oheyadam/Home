@@ -1,9 +1,9 @@
 package com.oheyadam.core.common.network
 
-sealed class Result<T> {
-  class Success<T>(val data: T) : Result<T>()
-  class Error<T>(val code: Int) : Result<T>()
-  class Exception<T>(val throwable: Throwable) : Result<T>()
+sealed class Result<out T> {
+  class Success<out T>(val data: T) : Result<T>()
+  class Error(val code: Int) : Result<Nothing>()
+  class Exception(val throwable: Throwable) : Result<Nothing>()
 }
 
 /**
@@ -23,7 +23,7 @@ suspend fun <T> Result<T>.onSuccess(
 suspend fun <T> Result<T>.onError(
   block: suspend (code: Int) -> Unit
 ): Result<T> = apply {
-  if (this is Result.Error<T>) {
+  if (this is Result.Error) {
     block(code)
   }
 }
