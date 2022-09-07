@@ -38,9 +38,5 @@ gradlePlugin {
       id = "home.android.feature"
       implementationClass = "AndroidFeatureConventionPlugin"
     }
-    register("androidTest") {
-      id = "home.android.test"
-      implementationClass = "AndroidTestConventionPlugin"
-    }
   }
 }
