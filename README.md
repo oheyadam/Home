@@ -34,6 +34,7 @@ separated by package, which is good enough at the moment, but can be worth revis
 - Add UI / Snapshot tests
 - Explore more complex UIs in Compose
 - Add animations for transitions from List to Detail
+- I should do some interactive rebasing to make the commit history look better since it's quite unorganized at the moment
 
 ## Built With 🏗
 
