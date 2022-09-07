@@ -12,7 +12,7 @@ some details about it.
 
 ## How Do I Navigate This Project?
 
-Home relies on [Gradle Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html) to make it easy to add new modules. It's heavily inspired by [this](https://developer.squareup.com/blog/herding-elephants/) blog post. You can start in the `build-logic` module to see how this works.
+Home relies on [Gradle Convention Plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html) to make it easy to add new modules. You can start in the `build-logic` module to see how this works.
 
 The `core-common` module has some shared functionality that can be used across the app, `core-model` is where the domain models live, `core-network` is where all the Remote data plumbing lives. 
 
@@ -46,6 +46,13 @@ separated by package, which is good enough at the moment, but can be worth revis
     - [Navigation](https://developer.android.com/guide/navigation)
 - [Retrofit](https://square.github.io/retrofit/)
 - [Moshi](https://github.com/square/moshi)
+
+## Acknowledgments & Inspiration
+Some aspects of the code are inspired by open source community contributions and blog posts.
+
+- The tooling and `build-logic` is inspired by both [this](https://developer.squareup.com/blog/herding-elephants/) blog post and [NowInAndroid](https://github.com/android/nowinandroid)
+- The `core-network` module takes inspiration from [this](https://github.com/skydoves/retrofit-adapters) library
+- The use of Dagger multibinding to wire up the `library-analytics` module is inspired by [this](https://adambennett.dev/2021/03/intoset-dagger-multibindings-and-architecture/) blog post
 
 ## License
 
