@@ -13,6 +13,7 @@ dependencies {
   api(libs.junit4)
   api(libs.truth)
   api(libs.mockito.kotlin)
+  api(libs.mockito.inline)
   api(libs.androidx.test.core)
   api(libs.kotlinx.coroutines.test)
   api(libs.turbine)

@@ -18,6 +18,6 @@ val BREED_1 = Breed(
   weight = "23 - 27"
 )
 
-val BREED_2 = BREED_1.copy(id = 2)
+val BREED_2 = BREED_1.copy(id = 2, name = "Bulldog", thumbnailUrl = null)
 
 val BREEDS = listOf(BREED_1, BREED_2)

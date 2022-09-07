@@ -31,7 +31,7 @@ val BREED_RESPONSE_1 = BreedResponse(
   weight = WEIGHT_RESPONSE
 )
 
-val BREED_RESPONSE_2 = BREED_RESPONSE_1.copy(id = 2)
+val BREED_RESPONSE_2 = BREED_RESPONSE_1.copy(id = 2, name = "Bulldog", referenceImageId = null)
 
 val BREEDS_RESPONSES = listOf(BREED_RESPONSE_1, BREED_RESPONSE_2)
 

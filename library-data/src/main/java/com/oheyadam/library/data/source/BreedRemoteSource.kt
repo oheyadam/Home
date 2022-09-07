@@ -2,9 +2,9 @@ package com.oheyadam.library.data.source
 
 import com.oheyadam.core.common.network.Result
 import com.oheyadam.core.common.network.Result.*
-import com.oheyadam.library.data.model.toBreed
 import com.oheyadam.core.model.Breed
 import com.oheyadam.core.network.service.DogService
+import com.oheyadam.library.data.model.toBreed
 import javax.inject.Inject
 import javax.inject.Singleton
 
