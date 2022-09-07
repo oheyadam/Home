@@ -19,4 +19,6 @@ dependencies {
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.recyclerview)
   implementation(libs.material)
+
+  testImplementation(projects.coreTesting)
 }

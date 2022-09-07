@@ -38,7 +38,10 @@ class BreedsViewModel @Inject constructor(
       searchBreed(breed)
         .onSuccess { breeds ->
           internalState.update { s ->
-            s.copy(isLoading = false, errorResId = null, result = breeds.toBreedItems())
+            s.copy(
+              isLoading = false, errorResId = null,
+              result = breeds.toBreedItems()
+            )
           }
         }
         .onError { _ ->
