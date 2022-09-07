@@ -10,7 +10,7 @@ import coil.network.HttpException
 import com.oheyadam.core.common.network.onError
 import com.oheyadam.core.common.network.onException
 import com.oheyadam.core.common.network.onSuccess
-import com.oheyadam.core.data.usecase.GetDog
+import com.oheyadam.library.data.usecase.GetDog
 import com.oheyadam.library.analytics.tracker.Trackers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

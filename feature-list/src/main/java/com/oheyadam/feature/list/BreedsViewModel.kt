@@ -6,7 +6,7 @@ import coil.network.HttpException
 import com.oheyadam.core.common.network.onError
 import com.oheyadam.core.common.network.onException
 import com.oheyadam.core.common.network.onSuccess
-import com.oheyadam.core.data.usecase.SearchBreed
+import com.oheyadam.library.data.usecase.SearchBreed
 import com.oheyadam.feature.list.model.toBreedItems
 import com.oheyadam.library.analytics.tracker.Trackers
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,4 +1,4 @@
-package com.oheyadam.core.data.model
+package com.oheyadam.library.data.model
 
 import com.oheyadam.core.model.Breed
 import com.oheyadam.core.network.model.BreedResponse
@@ -7,7 +7,7 @@ import com.oheyadam.core.network.model.BreedResponse
  * Simplified mapping of both the Height and Weight properties. I'm just defaulting to Metric
  * here, but in the real world, you'd use the user's Locale to figure out which unit type to use
  * */
-fun BreedResponse.toBreed(thumbnailUrl: String) = Breed(
+fun BreedResponse.toBreed(thumbnailUrl: String?) = Breed(
   id = id,
   name = name,
   temperament = temperament,

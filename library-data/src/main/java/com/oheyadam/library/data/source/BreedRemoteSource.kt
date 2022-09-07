@@ -1,8 +1,8 @@
-package com.oheyadam.core.data.source
+package com.oheyadam.library.data.source
 
 import com.oheyadam.core.common.network.Result
 import com.oheyadam.core.common.network.Result.*
-import com.oheyadam.core.data.model.toBreed
+import com.oheyadam.library.data.model.toBreed
 import com.oheyadam.core.model.Breed
 import com.oheyadam.core.network.service.DogService
 import javax.inject.Inject
@@ -18,7 +18,7 @@ class BreedRemoteSource @Inject constructor(
       is Success -> {
         val data = response.data.map { breedResponse ->
           val referenceId = breedResponse.referenceImageId
-          if (referenceId.isNullOrBlank()) return@map breedResponse.toBreed("")
+          if (referenceId.isNullOrBlank()) return@map breedResponse.toBreed(null)
           val imageUrl = getImageUrl(referenceId)
           breedResponse.toBreed(imageUrl)
         }
@@ -37,7 +37,7 @@ class BreedRemoteSource @Inject constructor(
     }
   }
 
-  private suspend fun getImageUrl(referenceId: String): String {
+  private suspend fun getImageUrl(referenceId: String): String? {
     return when (val response = dogService.getImage(referenceId)) {
       is Success -> response.data.url
       /*
@@ -47,7 +47,7 @@ class BreedRemoteSource @Inject constructor(
         * a placeholder image along with some textual data about the breed beats throwing
         * an exception even though we technically have the textual Breed data
         * */
-      is Error, is Exception -> ""
+      is Error, is Exception -> null
     }
   }
 }
