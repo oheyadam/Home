@@ -8,5 +8,5 @@ data class BreedState(
   val name: String? = null,
   val thumbnailUrl: String? = null,
   val temperament: String? = null,
-  @StringRes val errorResId: Int? = null,
+  @StringRes val errorResId: Int? = null
 )

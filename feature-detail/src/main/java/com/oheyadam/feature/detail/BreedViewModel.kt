@@ -10,8 +10,8 @@ import coil.network.HttpException
 import com.oheyadam.core.common.network.onError
 import com.oheyadam.core.common.network.onException
 import com.oheyadam.core.common.network.onSuccess
-import com.oheyadam.library.data.usecase.GetDog
 import com.oheyadam.library.analytics.tracker.Trackers
+import com.oheyadam.library.data.usecase.GetDog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -61,5 +61,9 @@ class BreedViewModel @Inject constructor(
           trackers.error(throwable)
         }
     }
+  }
+
+  fun errorMessageShown() {
+    state = state.copy(errorResId = null)
   }
 }

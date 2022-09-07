@@ -37,6 +37,7 @@ fun DetailScreen(viewModel: BreedViewModel = viewModel()) {
     Snackbar(
       textResId = state.errorResId,
       onActionClick = { viewModel.getDogDetails() },
+      onSnackbarShown = { viewModel.errorMessageShown() },
       modifier = Modifier.align(BottomCenter)
     )
   }
@@ -162,6 +163,7 @@ private fun Description(
 private fun Snackbar(
   textResId: Int?,
   onActionClick: () -> Unit,
+  onSnackbarShown: () -> Unit,
   modifier: Modifier = Modifier
 ) {
   if (textResId == null) return
@@ -179,6 +181,7 @@ private fun Snackbar(
           actionLabel = actionLabel,
           duration = SnackbarDuration.Indefinite
         )
+        onSnackbarShown()
         if (result == SnackbarResult.ActionPerformed) {
           onActionClick()
         }
