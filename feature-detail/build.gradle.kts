@@ -3,7 +3,6 @@ plugins {
   id("home.android.library.compose")
   id("home.android.feature")
   id("dagger.hilt.android.plugin")
-  id("org.jetbrains.kotlin.android")
 }
 
 android {
