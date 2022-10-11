@@ -15,12 +15,14 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
 
       val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
       dependencies {
+        add("implementation", project(":core-design"))
         add("implementation", libs.findLibrary("coil.kt.compose").get())
         add("implementation", libs.findLibrary("androidx.compose.foundation").get())
         add("implementation", libs.findLibrary("androidx.compose.ui").get())
         add("implementation", libs.findLibrary("androidx.compose.ui.tooling").get())
         add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
         add("implementation", libs.findLibrary("androidx.compose.material").get())
+        add("implementation", libs.findLibrary("androidx.compose.material3").get())
         add("implementation", libs.findLibrary("androidx.compose.icons.core").get())
         add("implementation", libs.findLibrary("androidx.compose.icons.extended").get())
         add("implementation", libs.findLibrary("androidx.compose.runtime").get())
