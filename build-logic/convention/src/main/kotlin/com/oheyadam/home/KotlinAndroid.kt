@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
  */
 internal fun Project.configureKotlinAndroid(commonExtension: CommonExtension<*, *, *, *>) {
   commonExtension.apply {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
       minSdk = 21
