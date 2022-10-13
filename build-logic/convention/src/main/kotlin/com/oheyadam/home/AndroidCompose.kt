@@ -18,5 +18,11 @@ internal fun Project.configureAndroidCompose(commonExtension: CommonExtension<*,
     composeOptions {
       kotlinCompilerExtensionVersion = libs.findVersion("androidxComposeCompiler").get().toString()
     }
+
+    kotlinOptions {
+      freeCompilerArgs = freeCompilerArgs + listOf(
+        "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+      )
+    }
   }
 }

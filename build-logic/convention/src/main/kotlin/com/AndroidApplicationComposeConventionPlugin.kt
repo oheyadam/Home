@@ -1,5 +1,3 @@
-package com
-
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.oheyadam.home.configureAndroidCompose
 import org.gradle.api.Plugin
