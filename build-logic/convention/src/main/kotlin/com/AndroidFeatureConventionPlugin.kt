@@ -16,6 +16,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
       val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
       dependencies {
         add("implementation", project(":core-common"))
+        add("implementation", project(":core-design"))
         add("implementation", project(":core-model"))
         add("implementation", project(":library-data"))
         add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
