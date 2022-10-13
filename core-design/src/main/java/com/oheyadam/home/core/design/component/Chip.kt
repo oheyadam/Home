@@ -1,5 +1,6 @@
 package com.oheyadam.home.core.design.component
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -13,14 +14,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.oheyadam.core.design.R
 import com.oheyadam.home.core.design.theme.HomeTheme
 import kotlin.random.Random
 
 data class ChipMetadata(
   val id: Int,
-  val label: String,
+  @StringRes val labelResId: Int,
 )
 
 @Composable fun FilterChip(
@@ -32,7 +35,7 @@ data class ChipMetadata(
   FilterChip(
     selected = selected,
     onClick = onClick,
-    label = { Text(text = metadata.label) },
+    label = { Text(text = stringResource(metadata.labelResId)) },
     modifier = modifier
   )
 }
@@ -41,19 +44,19 @@ data class ChipMetadata(
   modifier: Modifier = Modifier,
   chipsMetadata: List<ChipMetadata>,
   selectedChipId: Int,
-  onChipSelected: (ChipMetadata) -> Unit,
+  onChipSelected: (Int) -> Unit,
 ) {
   Row(
     modifier = modifier
-      .padding(16.dp)
+      .padding(dimensionResource(R.dimen.spacing_default))
       .horizontalScroll(rememberScrollState()),
-    horizontalArrangement = Arrangement.spacedBy(16.dp)
+    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.spacing_default))
   ) {
     chipsMetadata.forEach { chipMetadata ->
       FilterChip(
         metadata = chipMetadata,
         selected = chipMetadata.id == selectedChipId,
-        onClick = { onChipSelected(chipMetadata) }
+        onClick = { onChipSelected(chipMetadata.id) }
       )
     }
   }
@@ -65,7 +68,7 @@ private fun FilterChipPreview() {
   HomeTheme {
     val boolean = Random.nextBoolean()
     FilterChip(
-      metadata = ChipMetadata(id = 1, label = boolean.toString()),
+      metadata = ChipMetadata(id = 1, labelResId = R.string.chip_top_stories),
       selected = boolean,
       onClick = {},
     )
@@ -77,19 +80,19 @@ private fun FilterChipPreview() {
 private fun ChipGroupPreview() {
   var selectedChipId: Int by remember { mutableStateOf(1) }
   val chips = listOf(
-    ChipMetadata(id = 1, label = "Top"),
-    ChipMetadata(id = 2, label = "New"),
-    ChipMetadata(id = 3, label = "Best"),
-    ChipMetadata(id = 4, label = "Ask"),
-    ChipMetadata(id = 5, label = "Show"),
-    ChipMetadata(id = 6, label = "Bookmarks"),
+    ChipMetadata(id = 1, labelResId = R.string.chip_top_stories),
+    ChipMetadata(id = 2, labelResId = R.string.chip_new_stories),
+    ChipMetadata(id = 3, labelResId = R.string.chip_best_stories),
+    ChipMetadata(id = 4, labelResId = R.string.chip_top_stories),
+    ChipMetadata(id = 5, labelResId = R.string.chip_new_stories),
+    ChipMetadata(id = 6, labelResId = R.string.chip_top_stories),
   )
   HomeTheme {
     FilterChipGroup(
       chipsMetadata = chips,
       selectedChipId = selectedChipId
-    ) { selectedChip ->
-      selectedChipId = selectedChip.id
+    ) { id ->
+      selectedChipId = id
     }
   }
 }

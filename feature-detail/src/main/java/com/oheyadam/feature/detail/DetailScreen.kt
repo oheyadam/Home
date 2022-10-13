@@ -36,7 +36,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.SubcomposeAsyncImage
-import com.oheyadam.core.common.R
+import com.oheyadam.core.design.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -63,7 +63,7 @@ fun DetailScreen(viewModel: BreedViewModel = viewModel()) {
 @Composable
 private fun Content(
   state: BreedState,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   LazyColumn(modifier = modifier) {
     item(key = state.thumbnailUrl) {
@@ -79,7 +79,7 @@ private fun Content(
 private fun DetailsCard(
   name: String?,
   temperament: String?,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   DefaultSpacer()
   Card(
@@ -100,7 +100,7 @@ private fun DetailsCard(
 @Composable
 private fun Thumbnail(
   thumbnailUrl: String?,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   if (thumbnailUrl == null) return
   SubcomposeAsyncImage(
@@ -121,7 +121,7 @@ private fun DefaultSpacer() {
 @Composable
 private fun Name(
   name: String?,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   if (name == null) return
   Description(
@@ -138,7 +138,7 @@ private fun Name(
 @Composable
 private fun Temperament(
   temperament: String?,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   if (temperament == null) return
   Description(
@@ -157,7 +157,7 @@ private fun Temperament(
 private fun Description(
   text: String,
   icon: @Composable (() -> Unit),
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   Row(
     verticalAlignment = CenterVertically,
@@ -181,7 +181,7 @@ private fun Snackbar(
   textResId: Int?,
   onActionClick: () -> Unit,
   onSnackbarShown: () -> Unit,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   if (textResId == null) return
   val hostState = remember { SnackbarHostState() }
@@ -208,7 +208,10 @@ private fun Snackbar(
 }
 
 @Composable
-private fun ProgressView(isLoading: Boolean, modifier: Modifier = Modifier) {
+private fun ProgressView(
+  isLoading: Boolean,
+  modifier: Modifier = Modifier,
+) {
   if (isLoading) {
     LinearProgressIndicator(modifier = modifier)
   }

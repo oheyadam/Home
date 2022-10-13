@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 import javax.inject.Inject
-import com.oheyadam.core.common.R as CommonR
+import com.oheyadam.core.design.R as DesignR
 
 @HiltViewModel
 class BreedsViewModel @Inject constructor(
@@ -47,13 +47,13 @@ class BreedsViewModel @Inject constructor(
         .onError { _ ->
           // we could do error-specific filtering based on the error code here
           internalState.update { s ->
-            s.copy(isLoading = false, errorResId = CommonR.string.error_generic)
+            s.copy(isLoading = false, errorResId = DesignR.string.error_generic)
           }
         }
         .onException { throwable ->
           val errorResId = when (throwable) {
-            is HttpException, is UnknownHostException -> CommonR.string.error_no_internet_connection
-            else -> CommonR.string.error_generic
+            is HttpException, is UnknownHostException -> DesignR.string.error_no_internet_connection
+            else -> DesignR.string.error_generic
           }
           internalState.update { s -> s.copy(isLoading = false, errorResId = errorResId) }
           trackers.error(throwable)

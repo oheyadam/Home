@@ -5,7 +5,16 @@
   <string name="action_refresh">Refresh</string>
   <string name="hint_search">Search</string>
   <string name="warning_no_matching_results">We couldn\'t find any results matching your query</string>
+  <string name="content_description_action_up">Navigate up</string>
+  <string name="content_description_action_settings">Settings</string>
   <string name="content_description_thumbnail">Thumbnail</string>
   <string name="content_description_name">Name</string>
   <string name="content_description_temperament">Temperament</string>
+  <string name="content_description_comments">Comments</string>
+  <string name="chip_top_stories">Top Stories</string>
+  <string name="chip_new_stories">New Stories</string>
+  <string name="chip_best_stories">Best Stories</string>
+  <string name="title_home">Home</string>
+  <string name="list_item_points">%d points</string>
+  <string name="list_item_author">by %s</string>
 </resources>

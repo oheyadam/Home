@@ -2,8 +2,8 @@ package com.oheyadam.feature.list
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.oheyadam.core.common.R
 import com.oheyadam.core.common.network.Result
+import com.oheyadam.core.design.R
 import com.oheyadam.core.testing.model.BREEDS
 import com.oheyadam.core.testing.model.BREED_2
 import com.oheyadam.core.testing.util.CoroutineDispatcherRule

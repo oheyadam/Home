@@ -19,7 +19,7 @@ import com.oheyadam.feature.list.navigation.ListNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.oheyadam.core.common.R as CommonR
+import com.oheyadam.core.design.R as DesignR
 
 @AndroidEntryPoint
 class BreedsFragment : Fragment(R.layout.fragment_breeds) {
@@ -51,7 +51,7 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
       progressView.isVisible = state.isLoading
       buttonClear.isVisible = state.isClearButtonVisible
       edittextSearchField.setText(state.query)
-      if (state.isEmptyStateVisible) showSnackbar(CommonR.string.warning_no_matching_results)
+      if (state.isEmptyStateVisible) showSnackbar(DesignR.string.warning_no_matching_results)
       adapter.submitList(state.result)
       state.selectedBreedId?.let { selectedBreedId ->
         val name = requireNotNull(state.selectedBreedName)
@@ -92,7 +92,7 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
   }
 
   private fun initializeRecyclerView() {
-    val itemMargins = resources.getDimensionPixelSize(CommonR.dimen.spacing_default)
+    val itemMargins = resources.getDimensionPixelSize(DesignR.dimen.spacing_default)
     itemDecoration = ListItemDecoration(itemMargins)
     with(binding) {
       listDogs.adapter = adapter
@@ -115,7 +115,7 @@ class BreedsFragment : Fragment(R.layout.fragment_breeds) {
     val length = if (refreshable) Snackbar.LENGTH_INDEFINITE else Snackbar.LENGTH_LONG
     Snackbar.make(binding.root, messageResId, length).apply {
       if (refreshable) {
-        setAction(CommonR.string.action_refresh) {
+        setAction(DesignR.string.action_refresh) {
           refreshAction()
         }
       }
