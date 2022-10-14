@@ -1,11 +1,12 @@
 package com.oheyadam.feature.list.hackernews.model
 
+import com.oheyadam.core.model.hackernews.ReadableTime
 import com.oheyadam.core.model.hackernews.Story
 
 data class StoryItem(
   val id: Long,
   val author: String,
-  val time: Int,
+  val time: ReadableTime,
   val kids: List<Long>,
   val descendants: Int,
   val score: Int,
@@ -15,8 +16,13 @@ data class StoryItem(
 
   fun shortenedUrl(): String {
     return url
-      .replace("https://www.", "")
-      .replace("http://www.", "")
+      .replace("https://", "")
+      .replace("http://", "")
+      .replace("www.", "")
+      .replaceAfter("/", "")
+      .replace("/", "")
+      .replaceAfter("?", "")
+      .replace("?", "")
   }
 
   fun isTrending(): Boolean {
@@ -27,7 +33,7 @@ data class StoryItem(
 fun Story.toStoryItem() = StoryItem(
   id = id,
   author = author.orEmpty(),
-  time = time ?: 0,
+  time = time ?: ReadableTime.JustNow,
   kids = kids.orEmpty(),
   descendants = descendants ?: 0,
   score = score ?: 0,

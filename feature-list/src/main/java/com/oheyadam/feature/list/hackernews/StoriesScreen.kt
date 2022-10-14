@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.oheyadam.core.design.R
+import com.oheyadam.core.model.hackernews.ReadableTime
 import com.oheyadam.feature.list.hackernews.model.StoriesState
 import com.oheyadam.feature.list.hackernews.model.StoryItem
 import com.oheyadam.feature.list.hackernews.model.toChipsMetadata
@@ -139,7 +140,7 @@ fun StoriesScreenPreview() {
       StoryItem(
         id = 1,
         author = "oheyadam",
-        time = 1,
+        time = ReadableTime.JustNow,
         kids = emptyList(),
         descendants = Random.nextInt(1, 100),
         score = Random.nextInt(1, 100),

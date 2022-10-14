@@ -23,6 +23,22 @@ class StoryItemTest {
   }
 
   @Test
+  fun `correctly shorten http urls that have subdirectories`() {
+    val actual = STORY_ITEM.copy(url = "https://github.com/oheyadam/Home").shortenedUrl()
+    val expected = "github.com"
+
+    assertThat(actual).isEqualTo(expected)
+  }
+
+  @Test
+  fun `correctly shorten http urls that have queries`() {
+    val actual = STORY_ITEM.copy(url = "https://www.youtube.com/watch?v=MBRqu0YOH14").shortenedUrl()
+    val expected = "youtube.com"
+
+    assertThat(actual).isEqualTo(expected)
+  }
+
+  @Test
   fun `assign as trending if comments and votes count is higher than 100`() {
     assertThat(STORY_ITEM.isTrending()).isTrue()
   }

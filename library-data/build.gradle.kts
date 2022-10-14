@@ -1,7 +1,7 @@
 plugins {
   id("home.android.library")
-  kotlin("kapt")
   id("dagger.hilt.android.plugin")
+  kotlin("kapt")
 }
 
 android {
@@ -18,4 +18,5 @@ dependencies {
   kapt(libs.hilt.compiler)
 
   testImplementation(projects.coreTesting)
+  testImplementation(libs.kotlinx.datetime)
 }
