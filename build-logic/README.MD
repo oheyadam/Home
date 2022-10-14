@@ -28,6 +28,8 @@ as opposed to creating a convention plugin with module-specific setup.
 Current list of convention plugins:
 
 - [`home.android.application`](convention/src/main/kotlin/AndroidApplicationConventionPlugin.kt),
-  [`home.android.library`](convention/src/main/kotlin/AndroidLibraryConventionPlugin.kt),
-  [`home.android.test`](convention/src/main/kotlin/AndroidTestConventionPlugin.kt):
-  Configures common Android and Kotlin options.
+- [`home.android.application.compose`](convention/src/main/kotlin/AndroidApplicationComposeConventionPlugin.kt),
+- [`home.android.library`](convention/src/main/kotlin/AndroidLibraryConventionPlugin.kt),
+- [`home.android.library.compose`](convention/src/main/kotlin/AndroidLibraryComposeConventionPlugin.kt),
+- [`home.android.feature`](convention/src/main/kotlin/AndroidFeatureConventionPlugin.kt),
+- [`home.android.hilt`](convention/src/main/kotlin/AndroidHiltConventionPlugin.kt),

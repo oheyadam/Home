@@ -1,6 +1,8 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
   id("home.android.library")
-  kotlin("kapt")
+  id("home.android.hilt")
 }
 
 android {
@@ -14,6 +16,4 @@ dependencies {
   implementation(projects.coreCommon)
 
   implementation(libs.timber)
-  implementation(libs.hilt.android)
-  kapt(libs.hilt.compiler)
 }

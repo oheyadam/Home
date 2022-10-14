@@ -1,8 +1,9 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
   id("home.android.application")
-  kotlin("kapt")
-  id("dagger.hilt.android.plugin")
-  alias(libs.plugins.navigation.safe.args)
+  id("home.android.application.compose")
+  id("home.android.hilt")
 }
 
 android {
@@ -39,24 +40,19 @@ android {
 }
 
 dependencies {
+  implementation(projects.coreDesign)
   implementation(projects.coreCommon)
-  implementation(projects.libraryData)
   implementation(projects.coreModel)
   implementation(projects.coreNetwork)
   implementation(projects.libraryAnalytics)
-  implementation(projects.featureList)
+  implementation(projects.libraryData)
   implementation(projects.featureDetail)
+  implementation(projects.featureList)
 
-  implementation(libs.androidx.appcompat)
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.fragment.ktx)
   implementation(libs.androidx.activity.ktx)
-  implementation(libs.androidx.navigation.fragment.ktx)
-  implementation(libs.androidx.navigation.ui.ktx)
-  implementation(libs.material)
-  implementation(libs.hilt.android)
-
-  kapt(libs.hilt.compiler)
-
-  kaptAndroidTest(libs.hilt.compiler)
+  implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.compose.material3)
+  implementation(libs.androidx.compose.material3.window.size)
+  implementation(libs.androidx.compose.ui)
 }

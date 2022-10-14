@@ -13,7 +13,6 @@ fun HomeTheme(
   dynamicColor: Boolean = false,
   content: @Composable() () -> Unit
 ) {
-  // val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
   val colors = when {
     dynamicColor && useDarkTheme -> dynamicDarkColorScheme(LocalContext.current)
     dynamicColor && !useDarkTheme -> dynamicLightColorScheme(LocalContext.current)

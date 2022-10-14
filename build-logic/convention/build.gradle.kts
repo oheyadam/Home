@@ -1,4 +1,5 @@
 import org.gradle.api.JavaVersion.VERSION_11
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `kotlin-dsl`
@@ -14,6 +15,12 @@ java {
 dependencies {
   compileOnly(libs.android.gradlePlugin)
   compileOnly(libs.kotlin.gradlePlugin)
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+  kotlinOptions {
+    jvmTarget = VERSION_11.toString()
+  }
 }
 
 gradlePlugin {
@@ -37,6 +44,10 @@ gradlePlugin {
     register("androidFeature") {
       id = "home.android.feature"
       implementationClass = "AndroidFeatureConventionPlugin"
+    }
+    register("androidHilt") {
+      id = "home.android.hilt"
+      implementationClass = "AndroidHiltConventionPlugin"
     }
   }
 }

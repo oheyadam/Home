@@ -9,21 +9,18 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     with(target) {
       pluginManager.apply {
         apply("com.android.library")
-        apply("org.jetbrains.kotlin.android")
-        apply("org.jetbrains.kotlin.kapt")
+        apply("home.android.hilt")
       }
 
       val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
       dependencies {
-        add("implementation", project(":core-common"))
         add("implementation", project(":core-design"))
+        add("implementation", project(":core-common"))
         add("implementation", project(":core-model"))
         add("implementation", project(":library-data"))
         add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
         add("implementation", libs.findLibrary("androidx.viewmodel.ktx").get())
         add("implementation", libs.findLibrary("coil.kt").get())
-        add("implementation", libs.findLibrary("hilt.android").get())
-        add("kapt", libs.findLibrary("hilt.compiler").get())
       }
     }
   }

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -24,7 +26,7 @@ include(":core-design")
 include(":core-model")
 include(":core-network")
 include(":core-testing")
+include(":library-analytics")
 include(":library-data")
 include(":feature-detail")
 include(":feature-list")
-include(":library-analytics")
