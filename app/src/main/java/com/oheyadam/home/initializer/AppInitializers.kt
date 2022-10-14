@@ -5,7 +5,7 @@ import com.oheyadam.core.common.initializer.Initializable
 import javax.inject.Inject
 
 class AppInitializers @Inject constructor(
-  private val initializers: Set<@JvmSuppressWildcards Initializable>
+  private val initializers: Set<@JvmSuppressWildcards Initializable>,
 ) {
 
   fun init(application: Application) {

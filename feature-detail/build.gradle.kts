@@ -11,8 +11,6 @@ android {
 
 dependencies {
   implementation(projects.libraryAnalytics)
-  implementation(libs.androidx.activity.ktx)
-  implementation(libs.androidx.fragment.ktx)
 
   testImplementation(projects.coreTesting)
 }

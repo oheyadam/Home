@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">Home</string>
   <string name="error_no_internet_connection">Your device is offline</string>
   <string name="error_generic">Something went wrong. Please try again</string>
   <string name="action_refresh">Refresh</string>

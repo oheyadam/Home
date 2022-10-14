@@ -1,6 +1,3 @@
 package com.oheyadam.feature.list.navigation
 
-interface ListNavigator {
-
-  fun goToBreedDetail(breedId: Int, breedName: String)
-}
+interface ListNavigator

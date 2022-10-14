@@ -1,6 +1,6 @@
 package com.oheyadam.core.network.moshi
 
-import com.oheyadam.core.network.model.hackernews.ReadableTimeResponse
+import com.oheyadam.core.network.model.ReadableTimeResponse
 import dagger.Reusable
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit

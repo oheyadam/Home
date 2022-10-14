@@ -10,7 +10,7 @@ sealed class Result<out T> {
  * Represents a network result that successfully received a response containing body data.
  * */
 suspend fun <T> Result<T>.onSuccess(
-  block: suspend (T) -> Unit
+  block: suspend (T) -> Unit,
 ): Result<T> = apply {
   if (this is Result.Success) {
     block(data)
@@ -21,7 +21,7 @@ suspend fun <T> Result<T>.onSuccess(
  * Represents a network result that successfully received a response containing an error message.
  * */
 suspend fun <T> Result<T>.onError(
-  block: suspend (code: Int) -> Unit
+  block: suspend (code: Int) -> Unit,
 ): Result<T> = apply {
   if (this is Result.Error) {
     block(code)
@@ -33,7 +33,7 @@ suspend fun <T> Result<T>.onError(
  * from the network such as IOException.
  * */
 suspend fun <T> Result<T>.onException(
-  block: suspend (throwable: Throwable) -> Unit
+  block: suspend (throwable: Throwable) -> Unit,
 ): Result<T> = apply {
   if (this is Result.Exception) {
     block(throwable)

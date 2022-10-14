@@ -2,10 +2,9 @@ package com.oheyadam.core.network.di
 
 import android.content.Context
 import com.oheyadam.core.network.call.ResultCallAdapterFactory
-import com.oheyadam.core.network.moshi.ReadableTimeAdapter
 import com.oheyadam.core.network.moshi.PrettifyInstant
-import com.oheyadam.core.network.service.DogService
-import com.oheyadam.core.network.service.hackernews.HackerNewsService
+import com.oheyadam.core.network.moshi.ReadableTimeAdapter
+import com.oheyadam.core.network.service.HackerNewsService
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -95,12 +94,6 @@ object NetworkModule {
   @Provides
   @Singleton
   fun provideHackerNewsService(retrofit: Retrofit): HackerNewsService {
-    return retrofit.create()
-  }
-
-  @Provides
-  @Singleton
-  fun provideDogService(retrofit: Retrofit): DogService {
     return retrofit.create()
   }
 }

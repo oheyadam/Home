@@ -1,6 +1,6 @@
 package com.oheyadam.core.network.moshi
 
-import com.oheyadam.core.network.model.hackernews.ReadableTimeResponse
+import com.oheyadam.core.network.model.ReadableTimeResponse
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter

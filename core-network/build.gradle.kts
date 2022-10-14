@@ -8,6 +8,7 @@ plugins {
 android {
   namespace = "com.oheyadam.core.network"
 }
+
 dependencies {
   implementation(projects.coreCommon)
   implementation(libs.kotlinx.coroutines.android)
