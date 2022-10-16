@@ -17,11 +17,11 @@ class FakeHackerNewsRemoteSource : HackerNewsRemoteSource {
     return Result.Success(COMMENTS.first { comment -> comment.id == commentId })
   }
 
-  override suspend fun getTopStories(): Result<List<Story>> {
+  override suspend fun getTopStoriesIds(): Result<List<Story>> {
     return Result.Success(STORIES)
   }
 
-  override suspend fun getNewStories(): Result<List<Story>> {
+  override suspend fun getNewStoriesIds(): Result<List<Story>> {
     return Result.Success(STORIES)
   }
 }

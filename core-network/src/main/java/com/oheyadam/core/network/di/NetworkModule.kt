@@ -51,7 +51,9 @@ object NetworkModule {
 
   @Provides
   @IntoSet
-  fun provideInstantJsonAdapter(prettifyInstant: PrettifyInstant): JsonAdapter<*> {
+  fun provideInstantJsonAdapter(
+    prettifyInstant: PrettifyInstant,
+  ): JsonAdapter<*> {
     return ReadableTimeAdapter(prettifyInstant)
   }
 

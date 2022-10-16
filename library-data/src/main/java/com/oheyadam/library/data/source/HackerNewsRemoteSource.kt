@@ -7,6 +7,6 @@ import com.oheyadam.core.model.Story
 interface HackerNewsRemoteSource {
   suspend fun getStory(storyId: Long): Result<Story>
   suspend fun getComment(commentId: Long): Result<Comment>
-  suspend fun getTopStories(): Result<List<Story>>
-  suspend fun getNewStories(): Result<List<Story>>
+  suspend fun getTopStoriesIds(): Result<List<Long>>
+  suspend fun getNewStoriesIds(): Result<List<Long>>
 }

@@ -15,6 +15,7 @@ class ReadableTimeAdapter(
   @Synchronized
   @FromJson
   override fun fromJson(reader: JsonReader): ReadableTimeResponse? {
+    if (reader.peek() == null) return reader.nextNull()
     val instant = Instant.fromEpochSeconds(reader.nextLong())
     return prettifyInstant(instant)
   }

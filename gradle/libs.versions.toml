@@ -23,6 +23,8 @@ androidxComposeRuntime = "1.0.0-rc01"
 androidxComposeUi = "1.0.0-rc01"
 androidxHilt = "2.42"
 androidxHiltExt = "1.0.0"
+androidxPaging = "3.1.1"
+androidxPagingCompose = "1.0.0-alpha16"
 androidCoreLibraryDesgurating = "1.1.5"
 coil = "2.2.0"
 junit4 = "4.13.2"
@@ -72,6 +74,9 @@ androidx-compose-material3-window-size = { group = "androidx.compose.material3",
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycleViewModelCompose" }
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidxPaging" }
+androidx-paging-test = { group = "androidx.paging", name = "paging-common", version.ref = "androidxPagingCompose" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPaging" }
 android-core-library-desugaring = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidCoreLibraryDesgurating" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }

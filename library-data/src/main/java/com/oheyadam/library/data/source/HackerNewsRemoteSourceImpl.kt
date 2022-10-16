@@ -9,7 +9,6 @@ import com.oheyadam.core.model.Story
 import com.oheyadam.core.network.model.STORY_TYPE
 import com.oheyadam.core.network.service.HackerNewsService
 import com.oheyadam.library.data.model.toComment
-import com.oheyadam.library.data.model.toStories
 import com.oheyadam.library.data.model.toStory
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -49,17 +48,17 @@ class HackerNewsRemoteSourceImpl @Inject constructor(
     }
   }
 
-  override suspend fun getTopStories(): Result<List<Story>> {
+  override suspend fun getTopStoriesIds(): Result<List<Long>> {
     return when (val response = service.getTopStories()) {
-      is Success -> Success(response.data.toStories())
+      is Success -> Success(response.data)
       is Error -> Error(response.code)
       is Exception -> Exception(response.throwable)
     }
   }
 
-  override suspend fun getNewStories(): Result<List<Story>> {
+  override suspend fun getNewStoriesIds(): Result<List<Long>> {
     return when (val response = service.getNewStories()) {
-      is Success -> Success(response.data.toStories())
+      is Success -> Success(response.data)
       is Error -> Error(response.code)
       is Exception -> Exception(response.throwable)
     }
