@@ -1,3 +1,4 @@
+import com.oheyadam.home.implementation
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension
@@ -14,13 +15,13 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
       val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
       dependencies {
-        add("implementation", project(":core-design"))
-        add("implementation", project(":core-common"))
-        add("implementation", project(":core-model"))
-        add("implementation", project(":library-data"))
-        add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
-        add("implementation", libs.findLibrary("androidx.viewmodel.ktx").get())
-        add("implementation", libs.findLibrary("coil.kt").get())
+        implementation(project(":core-design"))
+        implementation(project(":core-common"))
+        implementation(project(":core-model"))
+        implementation(project(":library-data"))
+        implementation(libs.findLibrary("kotlinx.coroutines.android").get())
+        implementation(libs.findLibrary("androidx.viewmodel.ktx").get())
+        implementation(libs.findLibrary("coil.kt").get())
       }
     }
   }

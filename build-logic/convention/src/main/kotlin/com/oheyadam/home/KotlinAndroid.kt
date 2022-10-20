@@ -3,7 +3,9 @@ package com.oheyadam.home
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion.VERSION_11
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.provideDelegate
@@ -41,7 +43,11 @@ internal fun Project.configureKotlinAndroid(commonExtension: CommonExtension<*, 
 
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
     dependencies {
-      add("coreLibraryDesugaring", libs.findLibrary("android.core.library.desugaring").get())
+      coreLibraryDesugaring(libs.findLibrary("android.core.library.desugaring").get())
     }
   }
+}
+
+private fun DependencyHandlerScope.coreLibraryDesugaring(dependencyNotation: Any): Dependency? {
+  return add("coreLibraryDesugaring", dependencyNotation)
 }
