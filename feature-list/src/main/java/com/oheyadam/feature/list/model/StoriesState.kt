@@ -12,6 +12,7 @@ data class StoriesState(
   val storyItems: List<StoryItem> = emptyList(),
   val viewTypes: List<ViewType> = listOf(TopStories(), NewStories(), BestStories()),
   val selectedViewType: ViewType = TopStories(),
+  val page: Int = 0,
   @StringRes val errorResId: Int? = null,
 ) {
 

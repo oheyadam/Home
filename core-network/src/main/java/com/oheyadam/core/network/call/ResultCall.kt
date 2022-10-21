@@ -1,6 +1,7 @@
 package com.oheyadam.core.network.call
 
 import com.oheyadam.core.common.network.Result
+import kotlinx.coroutines.CancellationException
 import okhttp3.Request
 import okio.Timeout
 import retrofit2.Call
@@ -12,17 +13,17 @@ class ResultCall<T : Any>(private val delegate: Call<T>) : Call<Result<T>> {
   override fun enqueue(callback: Callback<Result<T>>) {
     delegate.enqueue(object : Callback<T> {
       override fun onResponse(
-				call: Call<T>,
-				response: Response<T>,
-			) {
+        call: Call<T>,
+        response: Response<T>,
+      ) {
         val result = executeCall { response }
         callback.onResponse(this@ResultCall, Response.success(result))
       }
 
       override fun onFailure(
-				call: Call<T>,
-				t: Throwable,
-			) {
+        call: Call<T>,
+        t: Throwable,
+      ) {
         callback.onResponse(this@ResultCall, Response.success(Result.Exception(t)))
       }
     })
@@ -40,8 +41,8 @@ class ResultCall<T : Any>(private val delegate: Call<T>) : Call<Result<T>> {
   override fun timeout(): Timeout = delegate.timeout()
 
   private fun <T : Any> executeCall(
-		execute: () -> Response<T>,
-	): Result<T> {
+    execute: () -> Response<T>,
+  ): Result<T> {
     return try {
       val response = execute()
       val body = response.body()
@@ -50,6 +51,7 @@ class ResultCall<T : Any>(private val delegate: Call<T>) : Call<Result<T>> {
         else -> Result.Error(code = response.code())
       }
     } catch (e: Throwable) {
+      if (e is CancellationException) throw e
       Result.Exception(e)
     }
   }

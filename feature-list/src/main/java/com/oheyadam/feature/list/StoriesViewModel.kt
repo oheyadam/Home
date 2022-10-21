@@ -14,12 +14,18 @@ import com.oheyadam.feature.list.model.StoriesEvent.OpenItem
 import com.oheyadam.feature.list.model.StoriesEvent.OpenSettings
 import com.oheyadam.feature.list.model.StoriesEvent.UpdateViewType
 import com.oheyadam.feature.list.model.StoriesState
+import com.oheyadam.feature.list.model.ViewType.BestStories
+import com.oheyadam.feature.list.model.ViewType.NewStories
+import com.oheyadam.feature.list.model.ViewType.TopStories
 import com.oheyadam.feature.list.model.toStoryItems
-import com.oheyadam.feature.list.usecase.ResolveStories
 import com.oheyadam.library.analytics.tracker.Trackers
 import com.oheyadam.library.data.paging.StoriesPager
+import com.oheyadam.library.data.paging.StoriesPager.StoriesType.BEST
+import com.oheyadam.library.data.paging.StoriesPager.StoriesType.NEW
+import com.oheyadam.library.data.paging.StoriesPager.StoriesType.TOP
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -32,7 +38,6 @@ private const val VIEW_TYPE = "VIEW_TYPE"
 class StoriesViewModel @Inject constructor(
   private val savedStateHandle: SavedStateHandle,
   private val storiesPager: StoriesPager,
-  private val resolveStories: ResolveStories,
   private val trackers: Trackers,
 ) : ViewModel() {
 
@@ -53,11 +58,14 @@ class StoriesViewModel @Inject constructor(
 
   fun consume(event: StoriesEvent) {
     when (event) {
-      is Load -> load()
+      is Load -> load(event.viewTypeId)
       is OpenItem -> {}
       is UpdateViewType -> updateViewType(event)
       OpenSettings -> {}
-      LoadMore -> fetchStories(internalState.value.storyItems.last().id)
+      LoadMore -> {
+        val page = internalState.value.page
+        fetchStories(page)
+      }
     }
   }
 
@@ -87,18 +95,25 @@ class StoriesViewModel @Inject constructor(
     consume(Load(viewTypeId))
   }
 
-  private fun load() {
+  private fun load(viewTypeId: Int) {
     viewModelScope.launch {
-      storiesPager.initialize()
-      fetchStories()
+      when (internalState.value.resolveViewType(viewTypeId)) {
+        is TopStories -> storiesPager.refresh(TOP)
+        is NewStories -> storiesPager.refresh(NEW)
+        is BestStories -> storiesPager.refresh(BEST)
+      }
+      viewModelScope.launch {
+        delay(300)
+      }
+      fetchStories(internalState.value.page)
     }
   }
 
-  private fun fetchStories(lastIndex: Long = 0) {
+  private fun fetchStories(page: Int) {
     job?.cancel()
     job = viewModelScope.launch {
-      internalState.update { s -> s.copy(isLoading = true) }
-      resolveStories(internalState.value.selectedViewType, lastIndex)
+      internalState.update { s -> s.copy(isLoading = true, page = page + 1) }
+      storiesPager.fetch(page)
     }
   }
 
